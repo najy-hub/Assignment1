@@ -188,14 +188,21 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
   ✍️ إجابتك النصية:<br>${answers.q7}`;
 
- fetch("https://script.google.com/macros/s/AKfycbzoJtJ1NdIcK4HGY-1WKV6TZQE8DSni77Www69q6DbEXpqTmlCmKeWf-tO1B2kWMcZZ/exec", {
+fetch("https://script.google.com/macros/s/AKfycbyzX3jCEt2M0rASjMeefF7W4c-OUmkD3y3BIZxoiKwmneLe5nMrkqB_PPKyXAaUgLk/exec", {
   method: "POST",
-  body: JSON.stringify(answers),
+  body: JSON.stringify(answers), // answers يجب أن يكون كائن يحتوي على name و q1 و q2 ...
   headers: {
     "Content-Type": "application/json",
   },
 })
-;
+.then(response => response.text())
+.then(data => {
+  alert(data); // أو عرض رسالة نجاح
+})
+.catch(error => {
+  console.error("حدث خطأ أثناء الإرسال:", error);
+});
+
 });
 </script>
 
