@@ -164,10 +164,10 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
 
   const correct = {
     q1: "4",
-    q2: "P-type",
-    q3: "NOCT",
+    q2: "N-type",
+    q3: "STC",
     q4: "لا",
-    q5: "Polycrystalline",
+    q5: "Monocrystalline",
     q6: "50"
   };
 
