@@ -188,7 +188,7 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
   ✍️ إجابتك النصية:<br>${answers.q7}`;
 
-  fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbxmhlkBVHGDVMeLUKI7aYO2tcoFy4C3ghiXLLhYz7CzwM78BANVyQfWCCz0UeqUcOVP/exec", {
     method: "POST",
     body: JSON.stringify(answers),
     headers: {
