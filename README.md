@@ -100,7 +100,7 @@
   </div>
 
   <div class="question">
-    <p>1. السيليكون Si يحتوى فى المدار الاخير على .... ذرات تساهميه؟</p>
+    <p>1. السيليكون Si يحتوي في المدار الأخير على .... ذرات تساهمية؟</p>
     <input type="radio" name="q1" value="2"> 2
     <input type="radio" name="q1" value="3"> 3
     <input type="radio" name="q1" value="4"> 4
@@ -108,8 +108,8 @@
 
   <div class="question">
     <p>2. أي نوع من أنواع الألواح أكبر تدهور من السنة الأولى؟</p>
-    <input type="radio" name="q2" value="P.type"> P-type
-    <input type="radio" name="q2" value="N.type"> N-type
+    <input type="radio" name="q2" value="P-type"> P-type
+    <input type="radio" name="q2" value="N-type"> N-type
   </div>
 
   <div class="question">
@@ -163,7 +163,12 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   };
 
   const correct = {
-    q1: "4", q2: "P.type", q3: "NOCT", q4: "لا", q5: "Polycrystalline", q6: "50"
+    q1: "4",
+    q2: "P-type",
+    q3: "NOCT",
+    q4: "لا",
+    q5: "Polycrystalline",
+    q6: "50"
   };
 
   let score = 0;
