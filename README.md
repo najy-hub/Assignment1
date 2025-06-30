@@ -165,10 +165,10 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   // التصحيحات
   const correct = {
     q1: "4",
-    q2: "p-type",
-    q3: "noct",
+    q2: "P-type",
+    q3: "NOCT",
     q4: "لا",
-    q5: "polycrystalline",
+    q5: "Polycrystalline",
     q6: "50"
   };
 
