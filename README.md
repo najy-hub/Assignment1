@@ -37,9 +37,25 @@
       color: #0d47a1;
     }
 
-    input[type="radio"], textarea {
+    input[type="text"],
+    input[type="radio"],
+    textarea {
       margin-top: 10px;
       margin-right: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
 
     button {
@@ -78,6 +94,11 @@
 <h2>📘 اختبار Assignment 1 - الطاقة الشمسية</h2>
 
 <form id="quizForm">
+  <div class="question">
+    <p>🧑‍🎓 الاسم الكامل:</p>
+    <input type="text" name="student_name" required placeholder="أدخل اسمك الثلاثي">
+  </div>
+
   <div class="question">
     <p>1. السيليكون Si يحتوى فى المدار الاخير على .... ذرات تساهميه؟</p>
     <input type="radio" name="q1" value="2"> 2
@@ -118,7 +139,7 @@
 
   <div class="question">
     <p>7. ✍️ اكتب باختصار الاستراتيجية العامة لاختيار الألواح لمشروع 10 كيلوواط سكني:</p>
-    <textarea name="q7" rows="4" style="width:100%" placeholder="اكتب إجابتك هنا..."></textarea>
+    <textarea name="q7" rows="4" placeholder="اكتب إجابتك هنا..."></textarea>
   </div>
 
   <button type="submit">إرسال الإجابات</button>
@@ -130,11 +151,16 @@
 document.getElementById("quizForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const answers = {};
-  for (let i = 1; i <= 6; i++) {
-    answers["q" + i] = document.querySelector(`input[name="q${i}"]:checked`)?.value || "";
-  }
-  answers["q7"] = document.querySelector('textarea[name="q7"]').value || "";
+  const answers = {
+    name: document.querySelector('input[name="student_name"]').value,
+    q1: document.querySelector('input[name="q1"]:checked')?.value || "",
+    q2: document.querySelector('input[name="q2"]:checked')?.value || "",
+    q3: document.querySelector('input[name="q3"]:checked')?.value || "",
+    q4: document.querySelector('input[name="q4"]:checked')?.value || "",
+    q5: document.querySelector('input[name="q5"]:checked')?.value || "",
+    q6: document.querySelector('input[name="q6"]:checked')?.value || "",
+    q7: document.querySelector('textarea[name="q7"]').value || ""
+  };
 
   const correct = {
     q1: "4", q2: "P.type", q3: "NOCT", q4: "لا", q5: "Polycrystalline", q6: "50"
@@ -147,10 +173,10 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
 
   const resultBox = document.getElementById("resultBox");
   resultBox.style.display = "block";
-  resultBox.innerHTML = `✅ نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
-  📌 إجابتك الأخيرة:<br>${answers.q7}`;
+  resultBox.innerHTML = `✅ مرحباً ${answers.name}<br>
+  نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
+  ✍️ إجابتك النصية:<br>${answers.q7}`;
 
-  // إرسال إلى Google Sheets
   fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
     method: "POST",
     body: JSON.stringify(answers),
