@@ -152,36 +152,46 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const answers = {
-    name: document.querySelector('input[name="student_name"]').value,
-    q1: document.querySelector('input[name="q1"]:checked')?.value || "",
-    q2: document.querySelector('input[name="q2"]:checked')?.value || "",
-    q3: document.querySelector('input[name="q3"]:checked')?.value || "",
-    q4: document.querySelector('input[name="q4"]:checked')?.value || "",
-    q5: document.querySelector('input[name="q5"]:checked')?.value || "",
-    q6: document.querySelector('input[name="q6"]:checked')?.value || "",
-    q7: document.querySelector('textarea[name="q7"]').value || ""
+    name: document.querySelector('input[name="student_name"]').value.trim(),
+    q1: document.querySelector('input[name="q1"]:checked')?.value.trim() || "",
+    q2: document.querySelector('input[name="q2"]:checked')?.value.trim() || "",
+    q3: document.querySelector('input[name="q3"]:checked')?.value.trim() || "",
+    q4: document.querySelector('input[name="q4"]:checked')?.value.trim() || "",
+    q5: document.querySelector('input[name="q5"]:checked')?.value.trim() || "",
+    q6: document.querySelector('input[name="q6"]:checked')?.value.trim() || "",
+    q7: document.querySelector('textarea[name="q7"]').value.trim() || ""
   };
 
+  // التصحيحات
   const correct = {
     q1: "4",
-    q2: "P-type",
-    q3: "NOCT",
+    q2: "p-type",
+    q3: "noct",
     q4: "لا",
-    q5: "Polycrystalline",
+    q5: "polycrystalline",
     q6: "50"
   };
 
+  // حساب الدرجة
   let score = 0;
   for (let i = 1; i <= 6; i++) {
-    if (answers["q" + i] === correct["q" + i]) score++;
+    const userAnswer = (answers["q" + i] || "").trim().toLowerCase();
+    const correctAnswer = (correct["q" + i] || "").trim().toLowerCase();
+    if (userAnswer === correctAnswer) {
+      score++;
+    } else {
+      console.warn(`❌ سؤال ${i} خطأ. المرسل: "${userAnswer}"، المتوقع: "${correctAnswer}"`);
+    }
   }
 
+  // عرض النتيجة
   const resultBox = document.getElementById("resultBox");
   resultBox.style.display = "block";
   resultBox.innerHTML = `✅ مرحباً ${answers.name}<br>
   نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
   ✍️ إجابتك النصية:<br>${answers.q7}`;
 
+  // إرسال إلى Google Sheets
   fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
     method: "POST",
     body: JSON.stringify(answers),
@@ -190,6 +200,7 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     },
   });
 });
+
 </script>
 
 </body>
