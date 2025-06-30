@@ -8,27 +8,33 @@
   <style>
     body {
       font-family: 'Cairo', sans-serif;
-      background: #f9f9f9;
+      background: #e3f2fd;
       padding: 20px;
       color: #333;
     }
 
     h2 {
       text-align: center;
-      color: #00695c;
+      color: #1565c0;
       margin-bottom: 30px;
     }
 
     .question {
-      background: #fff;
+      background: #ffffff;
       padding: 20px;
       margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .question:hover {
+      transform: scale(1.01);
     }
 
     .question p {
       font-weight: bold;
+      color: #0d47a1;
     }
 
     input[type="radio"], textarea {
@@ -39,27 +45,30 @@
     button {
       display: block;
       margin: 30px auto;
-      padding: 12px 24px;
-      background: #00695c;
+      padding: 14px 28px;
+      background: #1976d2;
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 18px;
       cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
     }
 
     button:hover {
-      background: #004d40;
+      background: #0d47a1;
+      transform: scale(1.03);
     }
 
     #resultBox {
       text-align: center;
       font-weight: bold;
       margin-top: 20px;
-      color: #333;
-      background: #d7ffd9;
-      padding: 15px;
-      border-radius: 8px;
+      color: #1b5e20;
+      background: #c8e6c9;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #66bb6a;
       display: none;
     }
   </style>
@@ -136,7 +145,6 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     if (answers["q" + i] === correct["q" + i]) score++;
   }
 
-  // عرض النتيجة
   const resultBox = document.getElementById("resultBox");
   resultBox.style.display = "block";
   resultBox.innerHTML = `✅ نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
@@ -152,5 +160,6 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   });
 });
 </script>
+
 </body>
 </html>
