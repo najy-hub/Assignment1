@@ -101,9 +101,9 @@
 
   <div class="question">
     <p>1. السيليكون Si يحتوي في المدار الأخير على .... ذرات تساهمية؟</p>
-    <input type="radio" name="q1" value="2"> 2
-    <input type="radio" name="q1" value="3"> 3
     <input type="radio" name="q1" value="4"> 4
+    <input type="radio" name="q1" value="3"> 3
+    <input type="radio" name="q1" value="2"> 2
   </div>
 
   <div class="question">
@@ -162,7 +162,6 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     q7: document.querySelector('textarea[name="q7"]').value.trim() || ""
   };
 
-  // التصحيحات
   const correct = {
     q1: "4",
     q2: "P-type",
@@ -172,7 +171,6 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     q6: "50"
   };
 
-  // حساب الدرجة
   let score = 0;
   for (let i = 1; i <= 6; i++) {
     const userAnswer = (answers["q" + i] || "").trim().toLowerCase();
@@ -180,18 +178,16 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     if (userAnswer === correctAnswer) {
       score++;
     } else {
-      console.warn(`❌ سؤال ${i} خطأ. المرسل: "${userAnswer}"، المتوقع: "${correctAnswer}"`);
+      console.warn(`❌ سؤال ${i} غير مطابق. المرسل: "${userAnswer}"، المتوقع: "${correctAnswer}"`);
     }
   }
 
-  // عرض النتيجة
   const resultBox = document.getElementById("resultBox");
   resultBox.style.display = "block";
   resultBox.innerHTML = `✅ مرحباً ${answers.name}<br>
   نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
   ✍️ إجابتك النصية:<br>${answers.q7}`;
 
-  // إرسال إلى Google Sheets
   fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
     method: "POST",
     body: JSON.stringify(answers),
@@ -200,7 +196,6 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     },
   });
 });
-
 </script>
 
 </body>
