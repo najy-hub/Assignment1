@@ -87,7 +87,7 @@
 
 <h2>📘 اختبار Assignment 1 - الطاقة الشمسية</h2>
 
-<form action="https://script.google.com/macros/s/AKfycby_3klVwnmxd7U8W0nudb0w_OA1G84RW7r_Pf0jG3icbyOv1TJ_lpU5CI30w10V2Nd_/exec" method="POST" onsubmit="return calculateScore();">
+<form id="quizForm">
   <div class="question">
     <p>🧑‍🎓 الاسم الكامل:</p>
     <input type="text" name="name" required placeholder="أدخل اسمك الثلاثي">
@@ -132,13 +132,15 @@
     <input type="radio" name="q6" value="50"> 50
   </div>
 
-  <textarea name="score" id="scoreField" style="display:none;"></textarea>
-
   <button type="submit">إرسال الإجابات</button>
 </form>
 
+<div id="resultBox"></div>
+
 <script>
-function calculateScore() {
+document.getElementById("quizForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
   const correct = {
     q1: "4",
     q2: "N-type",
@@ -158,10 +160,28 @@ function calculateScore() {
 
   const percentage = Math.round((score / 6) * 100);
   const resultText = `${score} من 6 (${percentage}%)`;
-  document.getElementById("scoreField").value = resultText;
 
-  return true; // يسمح بالإرسال بعد حساب النتيجة
-}
+  const name = document.querySelector('input[name="name"]').value;
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("score", resultText);
+
+  fetch("https://script.google.com/macros/s/AKfycby_3klVwnmxd7U8W0nudb0w_OA1G84RW7r_Pf0jG3icbyOv1TJ_lpU5CI30w10V2Nd_/exec", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    const box = document.getElementById("resultBox");
+    box.style.display = "block";
+    box.innerHTML = `✅ مرحبًا ${name}<br> نتيجتك: ${resultText}`;
+  })
+  .catch(error => {
+    alert("❌ حدث خطأ أثناء الإرسال، حاول مرة أخرى");
+    console.error(error);
+  });
+});
 </script>
 
 </body>
