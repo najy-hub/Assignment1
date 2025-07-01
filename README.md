@@ -132,6 +132,11 @@
     <input type="radio" name="q6" value="50"> 50
   </div>
 
+  <div class="question">
+    <p>7. ✍️ اكتب باختصار الاستراتيجية العامة لاختيار الألواح لمشروع 10 كيلوواط سكني:</p>
+    <textarea name="q7" rows="4" placeholder="اكتب إجابتك هنا..."></textarea>
+  </div>
+
   <button type="submit">إرسال الإجابات</button>
 </form>
 
@@ -161,13 +166,15 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   const percentage = Math.round((score / 6) * 100);
   const resultText = `${score} من 6 (${percentage}%)`;
 
-  const name = document.querySelector('input[name="name"]').value;
+  const name = document.querySelector('input[name="name"]').value.trim();
+  const q7 = document.querySelector('textarea[name="q7"]').value.trim();
 
   const formData = new FormData();
   formData.append("name", name);
   formData.append("score", resultText);
+  formData.append("q7", q7);
 
-  fetch("https://script.google.com/macros/s/AKfycby_3klVwnmxd7U8W0nudb0w_OA1G84RW7r_Pf0jG3icbyOv1TJ_lpU5CI30w10V2Nd_/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwC5mD_MT7LK83IQJJ1fiwRkinhMDjQZQkaTCQcL6sX8KlMuU4tXDgwyn_Xzlxw_mPiyA/exec", {
     method: "POST",
     body: formData
   })
@@ -175,7 +182,7 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   .then(data => {
     const box = document.getElementById("resultBox");
     box.style.display = "block";
-    box.innerHTML = `✅ مرحبًا ${name}<br> نتيجتك: ${resultText}`;
+    box.innerHTML = `✅ مرحبًا ${name}<br> نتيجتك: ${resultText}<br><br>✍️ إجابتك:<br>${q7}`;
   })
   .catch(error => {
     alert("❌ حدث خطأ أثناء الإرسال، حاول مرة أخرى");
