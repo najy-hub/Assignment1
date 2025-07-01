@@ -1,38 +1,18 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <title>نموذج اختبار</title>
+  <meta charset="UTF-8">
+  <title>إرسال النتيجة</title>
 </head>
-<body>
-  <h2>اختبار تجربة الإرسال</h2>
-  <form id="testForm">
-    <label>الاسم:</label>
-    <input type="text" id="name" required />
-    <button type="submit">إرسال</button>
+<body style="font-family: Arial; text-align: center; padding: 50px; direction: rtl;">
+
+  <h2>📤 إرسال نتيجتك</h2>
+
+  <form action="https://script.google.com/macros/s/AKfycbxVvjtqqSVt2roMBjplYJCIQFAu6FbFLnFJhh9kZ7QGdEZkqkiK2M8euGMXRRKv1UQ3cg/exec" method="POST">
+    <input type="text" name="name" placeholder="اسم الطالب" required style="padding: 10px; font-size: 16px;"><br><br>
+    <input type="text" name="score" placeholder="النتيجة (مثلاً 6 من 6)" required style="padding: 10px; font-size: 16px;"><br><br>
+    <button type="submit" style="padding: 10px 20px; font-size: 18px;">✅ إرسال</button>
   </form>
 
-  <p id="result"></p>
-
-  <script>
-    document.getElementById("testForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value;
-
-      fetch("https://script.google.com/macros/s/AKfycbzz6kNU5DPE4MVLIUr2mI4wZ6xLWARJ-vXeldHMp7D7dekauOEKEI-ihs2xB2M3GCaQjw/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name })
-      })
-      .then(res => res.text())
-      .then(text => {
-        document.getElementById("result").innerText = "✅ " + text;
-      })
-      .catch(err => {
-        document.getElementById("result").innerText = "❌ حدث خطأ: " + err;
-      });
-    });
-  </script>
 </body>
 </html>
