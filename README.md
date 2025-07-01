@@ -329,16 +329,17 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     method: "POST",
     body: formData
   })
-  .then(response => response.text())
-  .then(data => {
-    const box = document.getElementById("resultBox");
-    box.style.display = "block";
-    box.innerHTML = `✅ مرحبًا ${name}<br> نتيجتك: ${resultText}<br><br>✍️ إجابتك: ${q7}`;
-  })
-  .catch(error => {
-    alert("❌ حدث خطأ أثناء الإرسال، حاول مرة أخرى");
-    console.error(error);
-  });
+ .then(response => response.text())
+.then(data => {
+  const box = document.getElementById("resultBox");
+  box.style.display = "block";
+  box.innerHTML = `✅ مرحبًا ${name}<br> نتيجتك: ${resultText}<br><br>✍️ إجابتك:<br>${q7}`;
+})
+.catch(error => {
+  alert("❌ حدث خطأ أثناء الإرسال، حاول مرة أخرى");
+  console.error(error);
+});
+
 });
 </script>
 
