@@ -37,15 +37,28 @@
       color: #0d47a1;
     }
 
+    .question label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
     input[type="text"],
-    input[type="radio"],
     textarea {
-      margin-top: 10px;
-      margin-right: 10px;
       width: 100%;
       padding: 10px;
+      margin-top: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
+    }
+
+    input[type="radio"] {
+      margin-left: 8px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
     }
 
     button {
@@ -77,6 +90,12 @@
       border: 2px solid #66bb6a;
       display: none;
     }
+
+    @media (max-width: 600px) {
+      button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -91,40 +110,40 @@
 
   <div class="question">
     <p>1. السيليكون Si يحتوي في المدار الأخير على .... ذرات تساهمية؟</p>
-    <input type="radio" name="q1" value="4"> 4
-    <input type="radio" name="q1" value="3"> 3
-    <input type="radio" name="q1" value="2"> 2
+    <label><input type="radio" name="q1" value="4"> 4</label>
+    <label><input type="radio" name="q1" value="3"> 3</label>
+    <label><input type="radio" name="q1" value="2"> 2</label>
   </div>
 
   <div class="question">
     <p>2. أي نوع من أنواع الألواح أكبر تدهور من السنة الأولى؟</p>
-    <input type="radio" name="q2" value="P-type"> P-type
-    <input type="radio" name="q2" value="N-type"> N-type
+    <label><input type="radio" name="q2" value="P-type"> P-type</label>
+    <label><input type="radio" name="q2" value="N-type"> N-type</label>
   </div>
 
   <div class="question">
     <p>3. أي من نتائج الاختبارات تستخدم للمقارنة بين الألواح؟</p>
-    <input type="radio" name="q3" value="STC"> STC
-    <input type="radio" name="q3" value="NOCT"> NOCT
+    <label><input type="radio" name="q3" value="STC"> STC</label>
+    <label><input type="radio" name="q3" value="NOCT"> NOCT</label>
   </div>
 
   <div class="question">
     <p>4. هل Air Mass المكتوبة على الألواح تعني كتلة الهواء المار خلال الألواح؟</p>
-    <input type="radio" name="q4" value="نعم"> نعم
-    <input type="radio" name="q4" value="لا"> لا
+    <label><input type="radio" name="q4" value="نعم"> نعم</label>
+    <label><input type="radio" name="q4" value="لا"> لا</label>
   </div>
 
   <div class="question">
     <p>5. أي أنواع الألواح أكثر تأثراً بدرجة الحرارة؟</p>
-    <input type="radio" name="q5" value="Monocrystalline"> Monocrystalline
-    <input type="radio" name="q5" value="Polycrystalline"> Polycrystalline
+    <label><input type="radio" name="q5" value="Monocrystalline"> Monocrystalline</label>
+    <label><input type="radio" name="q5" value="Polycrystalline"> Polycrystalline</label>
   </div>
 
   <div class="question">
     <p>6. إذا كانت درجة حرارة البيئة Ambient Temperature 35°C، ما هي درجة حرارة الخلية المتوقعة؟</p>
-    <input type="radio" name="q6" value="25"> 25
-    <input type="radio" name="q6" value="40"> 40
-    <input type="radio" name="q6" value="50"> 50
+    <label><input type="radio" name="q6" value="25"> 25</label>
+    <label><input type="radio" name="q6" value="40"> 40</label>
+    <label><input type="radio" name="q6" value="50"> 50</label>
   </div>
 
   <div class="question">
@@ -136,10 +155,7 @@
   <button type="submit">إرسال الإجابات</button>
 </form>
 
-<!-- عرض النتيجة -->
 <div id="resultBox"></div>
-
-<!-- iframe مخفي للإرسال بدون فتح الصفحة -->
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 
 <script>
