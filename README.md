@@ -34,7 +34,7 @@
         answers[key] = value;
       });
 
-      fetch("https://script.google.com/macros/s/AKfycbzJp2DumutANZDcS9Y5gA81Jafz5RP9JOQZOmrwBTqUOMTq4fnCxlyrFWDNpsFgOqHX/exec", {
+      fetch("https://script.google.com/macros/s/AKfycby9W-32CtvV7WiM7wqPk_uiPAWKS_2muYS0S3S8G36ucq08BZTAqCLbHnGwGirxpS1T/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
