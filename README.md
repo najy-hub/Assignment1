@@ -192,6 +192,10 @@ const resultData = {
   name: answers.name,
   score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
 };
+ const resultData = {
+  name: answers.name,
+  score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
+};
 
 fetch("https://script.google.com/macros/s/AKfycbzcd6uA7SrtqbTB7cs3_EqnhNpPIuxRHadWJqGbz60BuCttcCf3NNCDPd1J5LntWrV19g/exec", {
   method: "POST",
