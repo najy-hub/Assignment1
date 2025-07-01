@@ -192,20 +192,22 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbwwN1LtfPh8B9veMHOx4uDx9IdpboWicoeYaovFVx9WDsfOmmARrnFLCOpE2K4k7E3G7g/exec", {
-    method: "POST",
-    body: JSON.stringify(resultData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  .then(response => response.text())
-  .then(data => {
-    console.log("✅ تم إرسال النتيجة:", data);
-  })
-  .catch(error => {
-    console.error("❌ فشل الإرسال:", error);
-  });
+const xhr = new XMLHttpRequest();
+xhr.open("POST", "https://script.google.com/macros/s/AKfycbwwN1LtfPh8B9veMHOx4uDx9IdpboWicoeYaovFVx9WDsfOmmARrnFLCOpE2K4k7E3G7g/exec", true);
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      console.log("✅ تم إرسال النتيجة:", xhr.responseText);
+    } else {
+      console.error("❌ فشل الإرسال:", xhr.statusText);
+    }
+  }
+};
+
+xhr.send(JSON.stringify(resultData));
+;
 
 });
 </script>
