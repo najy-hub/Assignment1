@@ -87,7 +87,7 @@
 
 <h2>📘 اختبار Assignment 1 - الطاقة الشمسية</h2>
 
-<form action="https://script.google.com/macros/s/AKfycbwwN1LtfPh8B9veMHOx4uDx9IdpboWicoeYaovFVx9WDsfOmmARrnFLCOpE2K4k7E3G7g/exec" method="POST" onsubmit="return calculateScore();">
+<form action="https://script.google.com/macros/s/AKfycby_3klVwnmxd7U8W0nudb0w_OA1G84RW7r_Pf0jG3icbyOv1TJ_lpU5CI30w10V2Nd_/exec" method="POST" onsubmit="return calculateScore();">
   <div class="question">
     <p>🧑‍🎓 الاسم الكامل:</p>
     <input type="text" name="name" required placeholder="أدخل اسمك الثلاثي">
