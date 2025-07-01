@@ -162,10 +162,10 @@
 function handleSubmit() {
   const correct = {
     q1: "4",
-    q2: "N-type",
-    q3: "STC",
+    q2: "P-type",
+    q3: "NOCT",
     q4: "لا",
-    q5: "Monocrystalline",
+    q5: "Polycrystalline",
     q6: "50"
   };
 
