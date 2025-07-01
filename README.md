@@ -177,8 +177,6 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     const correctAnswer = (correct["q" + i] || "").trim().toLowerCase();
     if (userAnswer === correctAnswer) {
       score++;
-    } else {
-      console.warn(`❌ سؤال ${i} غير مطابق. المرسل: "${userAnswer}"، المتوقع: "${correctAnswer}"`);
     }
   }
 
@@ -188,23 +186,26 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
   نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
   ✍️ إجابتك النصية:<br>${answers.q7}`;
 
-const resultData = {
-  name: answers.name,
-  score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
-};
- const resultData = {
-  name: answers.name,
-  score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
-};
+  // إرسال الاسم والنتيجة فقط إلى Google Sheets
+  const resultData = {
+    name: answers.name,
+    score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
+  };
 
-fetch("https://script.google.com/macros/s/AKfycbzcd6uA7SrtqbTB7cs3_EqnhNpPIuxRHadWJqGbz60BuCttcCf3NNCDPd1J5LntWrV19g/exec", {
-  method: "POST",
-  body: JSON.stringify(resultData),
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-;
+  fetch("https://script.google.com/macros/s/AKfycbx6QVsYQymCKAnnmyn7se_BIK44NOQieBga8Lt9V_51ydY2krw0rIVVlxvI_zchLl9KnA/exec", {
+    method: "POST",
+    body: JSON.stringify(resultData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log("✅ تم إرسال النتيجة:", data);
+  })
+  .catch(error => {
+    console.error("❌ فشل الإرسال:", error);
+  });
 
 });
 </script>
