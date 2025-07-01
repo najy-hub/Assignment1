@@ -192,7 +192,7 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
     score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
   };
 
-  fetch("https://script.google.com/macros/s/AKfycby2UbLznxJo0PIbu3_lLx1gyEZ1BDKJdDw8M7GZwwU-0tPAgUNjPnqLNpBVLmiyjo6l/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwwN1LtfPh8B9veMHOx4uDx9IdpboWicoeYaovFVx9WDsfOmmARrnFLCOpE2K4k7E3G7g/exec", {
     method: "POST",
     body: JSON.stringify(resultData),
     headers: {
