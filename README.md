@@ -42,10 +42,6 @@
     textarea {
       margin-top: 10px;
       margin-right: 10px;
-    }
-
-    input[type="text"],
-    textarea {
       width: 100%;
       padding: 10px;
       border-radius: 8px;
@@ -87,7 +83,7 @@
 
 <h2>📘 اختبار Assignment 1 - الطاقة الشمسية</h2>
 
-<form id="quizForm">
+<form action="https://script.google.com/macros/s/AKfycbwC5mD_MT7LK83IQJJ1fiwRkinhMDjQZQkaTCQcL6sX8KlMuU4tXDgwyn_Xzlxw_mPiyA/exec" method="POST" target="hidden_iframe" onsubmit="return handleSubmit();">
   <div class="question">
     <p>🧑‍🎓 الاسم الكامل:</p>
     <input type="text" name="name" required placeholder="أدخل اسمك الثلاثي">
@@ -136,15 +132,18 @@
     <textarea name="q7" rows="4" placeholder="اكتب إجابتك هنا..."></textarea>
   </div>
 
+  <input type="hidden" name="score" id="scoreField">
   <button type="submit">إرسال الإجابات</button>
 </form>
 
+<!-- عرض النتيجة -->
 <div id="resultBox"></div>
 
-<script>
-document.getElementById("quizForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+<!-- iframe مخفي للإرسال بدون فتح الصفحة -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
+<script>
+function handleSubmit() {
   const correct = {
     q1: "4",
     q2: "N-type",
@@ -164,29 +163,17 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
 
   const percentage = Math.round((score / 6) * 100);
   const resultText = `${score} من 6 (${percentage}%)`;
-  const name = document.querySelector('input[name="name"]').value.trim();
-  const q7 = document.querySelector('textarea[name="q7"]').value.trim();
+  document.getElementById("scoreField").value = resultText;
 
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("score", resultText);
-  formData.append("q7", q7);
+  const name = document.querySelector('input[name="name"]').value;
+  const q7 = document.querySelector('textarea[name="q7"]').value;
 
-  fetch("https://script.google.com/macros/s/AKfycbwC5mD_MT7LK83IQJJ1fiwRkinhMDjQZQkaTCQcL6sX8KlMuU4tXDgwyn_Xzlxw_mPiyA/exec", {
-    method: "POST",
-    body: formData
-  })
-  .then(response => response.text())
-  .then(data => {
-    const box = document.getElementById("resultBox");
-    box.style.display = "block";
-    box.innerHTML = `✅ مرحبًا ${name}<br> نتيجتك: ${resultText}<br><br>✍️ إجابتك:<br>${q7}`;
-  })
-  .catch(error => {
-    alert("❌ حدث خطأ أثناء الإرسال، حاول مرة أخرى");
-    console.error(error);
-  });
-});
+  const box = document.getElementById("resultBox");
+  box.style.display = "block";
+  box.innerHTML = `✅ مرحبًا ${name}<br> نتيجتك: ${resultText}<br><br>✍️ إجابتك:<br>${q7}`;
+
+  return true;
+}
 </script>
 
 </body>
