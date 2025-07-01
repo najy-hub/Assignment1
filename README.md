@@ -44,16 +44,10 @@
       margin-right: 10px;
     }
 
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
+    input[type="text"],
     textarea {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
     }
@@ -93,12 +87,13 @@
 
 <h2>📘 اختبار Assignment 1 - الطاقة الشمسية</h2>
 
-<form id="quizForm">
+<form action="https://script.google.com/macros/s/AKfycbwwN1LtfPh8B9veMHOx4uDx9IdpboWicoeYaovFVx9WDsfOmmARrnFLCOpE2K4k7E3G7g/exec" method="POST" onsubmit="return calculateScore();">
   <div class="question">
     <p>🧑‍🎓 الاسم الكامل:</p>
-    <input type="text" name="student_name" required placeholder="أدخل اسمك الثلاثي">
+    <input type="text" name="name" required placeholder="أدخل اسمك الثلاثي">
   </div>
 
+  <!-- الأسئلة -->
   <div class="question">
     <p>1. السيليكون Si يحتوي في المدار الأخير على .... ذرات تساهمية؟</p>
     <input type="radio" name="q1" value="4"> 4
@@ -137,31 +132,13 @@
     <input type="radio" name="q6" value="50"> 50
   </div>
 
-  <div class="question">
-    <p>7. ✍️ اكتب باختصار الاستراتيجية العامة لاختيار الألواح لمشروع 10 كيلوواط سكني:</p>
-    <textarea name="q7" rows="4" placeholder="اكتب إجابتك هنا..."></textarea>
-  </div>
+  <textarea name="score" id="scoreField" style="display:none;"></textarea>
 
   <button type="submit">إرسال الإجابات</button>
 </form>
 
-<div id="resultBox"></div>
-
 <script>
-document.getElementById("quizForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const answers = {
-    name: document.querySelector('input[name="student_name"]').value.trim(),
-    q1: document.querySelector('input[name="q1"]:checked')?.value.trim() || "",
-    q2: document.querySelector('input[name="q2"]:checked')?.value.trim() || "",
-    q3: document.querySelector('input[name="q3"]:checked')?.value.trim() || "",
-    q4: document.querySelector('input[name="q4"]:checked')?.value.trim() || "",
-    q5: document.querySelector('input[name="q5"]:checked')?.value.trim() || "",
-    q6: document.querySelector('input[name="q6"]:checked')?.value.trim() || "",
-    q7: document.querySelector('textarea[name="q7"]').value.trim() || ""
-  };
-
+function calculateScore() {
   const correct = {
     q1: "4",
     q2: "N-type",
@@ -173,43 +150,18 @@ document.getElementById("quizForm").addEventListener("submit", function(e) {
 
   let score = 0;
   for (let i = 1; i <= 6; i++) {
-    const userAnswer = (answers["q" + i] || "").trim().toLowerCase();
-    const correctAnswer = (correct["q" + i] || "").trim().toLowerCase();
-    if (userAnswer === correctAnswer) {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    if (selected && selected.value === correct[`q${i}`]) {
       score++;
     }
   }
 
-  const resultBox = document.getElementById("resultBox");
-  resultBox.style.display = "block";
-  resultBox.innerHTML = `✅ مرحباً ${answers.name}<br>
-  نتيجتك: ${score} من 6 (${Math.round(score / 6 * 100)}%)<br><br>
-  ✍️ إجابتك النصية:<br>${answers.q7}`;
+  const percentage = Math.round((score / 6) * 100);
+  const resultText = `${score} من 6 (${percentage}%)`;
+  document.getElementById("scoreField").value = resultText;
 
-  // إرسال الاسم والنتيجة فقط إلى Google Sheets
-  const resultData = {
-    name: answers.name,
-    score: `${score} من 6 (${Math.round(score / 6 * 100)}%)`
-  };
-
-const xhr = new XMLHttpRequest();
-xhr.open("POST", "https://script.google.com/macros/s/AKfycbwwN1LtfPh8B9veMHOx4uDx9IdpboWicoeYaovFVx9WDsfOmmARrnFLCOpE2K4k7E3G7g/exec", true);
-xhr.setRequestHeader("Content-Type", "application/json");
-
-xhr.onreadystatechange = function () {
-  if (xhr.readyState === 4) {
-    if (xhr.status === 200) {
-      console.log("✅ تم إرسال النتيجة:", xhr.responseText);
-    } else {
-      console.error("❌ فشل الإرسال:", xhr.statusText);
-    }
-  }
-};
-
-xhr.send(JSON.stringify(resultData));
-;
-
-});
+  return true; // يسمح بالإرسال بعد حساب النتيجة
+}
 </script>
 
 </body>
