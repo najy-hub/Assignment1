@@ -190,6 +190,13 @@ function handleSubmit() {
 
   return true;
 }
+  <div style="text-align: center; margin-top: 40px;">
+  <a href="https://najy-hub.github.io/Solar-Professional-Engineer/"
+     style="display: inline-block; padding: 12px 24px; background-color: #1976d2; color: white; border-radius: 10px; text-decoration: none; font-weight: bold;">
+    ⬅️ العودة إلى صفحة الكورس
+  </a>
+</div>
+
 </script>
 
 </body>
