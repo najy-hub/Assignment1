@@ -99,7 +99,12 @@
   </style>
 </head>
 <body>
-
+<div style="text-align: center; margin-bottom: 20px;">
+  <a href="https://najy-hub.github.io/Solar-Professional-Engineer/"
+     style="display: inline-block; padding: 12px 24px; background-color: #1976d2; color: white; border-radius: 10px; text-decoration: none; font-weight: bold;">
+    ⬅️ العودة إلى صفحة الكورس
+  </a>
+</div>
 <h2>📘 اختبار Assignment 1 - الطاقة الشمسية</h2>
 
 <form action="https://script.google.com/macros/s/AKfycbwC5mD_MT7LK83IQJJ1fiwRkinhMDjQZQkaTCQcL6sX8KlMuU4tXDgwyn_Xzlxw_mPiyA/exec" method="POST" target="hidden_iframe" onsubmit="return handleSubmit();">
